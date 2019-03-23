@@ -1,4 +1,4 @@
-package com.example.sebservice;
+package com.example.webservice;
 
 import org.junit.Test;
 

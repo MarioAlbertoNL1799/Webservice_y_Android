@@ -1,4 +1,4 @@
-package com.example.sebservice;
+package com.example.webservice;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
