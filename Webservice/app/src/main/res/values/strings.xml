@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Webservice</string>
+    <string name="title">Consumir datos de un REST Webservice</string>
 </resources>
