@@ -2,9 +2,8 @@ package com.example.webservice;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.os.StrictMode;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import org.json.JSONArray;
@@ -16,24 +15,27 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 public class MainActivity extends AppCompatActivity {
 
+    private ListView lv_clientes_list;
+    private ArrayAdapter adapter;
+    private String getAllContactsURL = "http://192.168.1.78:8080/api_clientes?user_hash=12345&action=get";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().permitNetwork().build());
-        lv_contacts_list = (ListView)findViewById(R.id.lv_contacts_list);
-        adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1);
-        lv_contacts_list.setAdapter(adapter);
-    }
-    private ListView lv_contacts_list;
-    private ArrayAdapter adapter;
-    private String getAllContactsURL = "http://192.168.0.23/agenda_rest/webservices/getAllContacts.php";
 
+        lv_clientes_list = (ListView)findViewById(R.id.lv_clientes_list);
+        adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1);
+        lv_clientes_list.setAdapter(adapter);
+        webServiceRest(getAllContactsURL);
+    }
 
     private void webServiceRest(String requestURL){
         try{
             URL url = new URL(requestURL);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            Log.e("Abriendo conexion",connection.toString());
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             String line = "";
             String webServiceResult="";
@@ -69,10 +71,11 @@ public class MainActivity extends AppCompatActivity {
                 ape_mat = jsonObject.getString("ape_mat");
                 telefono = jsonObject.getString("telefono");
                 correo = jsonObject.getString("correo");
-                adapter.add(id + ": " + nombre);
+                adapter.add(id + ": " + nombre + " " + ape_pat + " " + ape_mat);
             }catch (JSONException e){
                 e.printStackTrace();
             }
         }
     }
+
 }

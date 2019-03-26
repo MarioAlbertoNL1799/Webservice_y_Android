@@ -20,7 +20,7 @@
     <ListView
         android:paddingTop="10dp"
         android:textColor="@color/colorValues"
-        android:id="@+id/lv_contacts_list"
+        android:id="@+id/lv_clientes_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></ListView>
 
